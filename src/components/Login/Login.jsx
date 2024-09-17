@@ -23,7 +23,7 @@ const Login = () => {
 
       <div className="login-right">
         <Card className="login-card">
-          <Title level={3} className="login-title">Your Next Job Awaits</Title>
+          <Title level={3} className="login-title">Welcome Back!</Title>
           <p className="text-center">Enter Your Details to Login</p>
           <Form
             name="login_form"

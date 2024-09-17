@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Register from './components/Registration/Registration';
 
 
+
 function App() {
   return (
     <>
