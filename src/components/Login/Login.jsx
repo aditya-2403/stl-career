@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Input, Button, Typography, Card } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './Login.css';
 
@@ -32,23 +32,24 @@ const Login = () => {
             layout="vertical"
           >
             <Form.Item
-              name="username"
-              rules={[{ required: true, message: 'Please enter your username!' }]}
-            >
-              <Input
-                prefix={<UserOutlined className="input-icon" />}
-                placeholder="Username"
-                size="large"
-                className="input-field"
-              />
-            </Form.Item>
+                  name="email"
+                  rules={[
+                    { required: true, message: 'Please enter your email!' },
+                    { type: 'email', message: 'Please enter a valid email!' }
+                  ]}
+                >
+                  <Input placeholder="Enter Your Email" size="large" className="input-field" 
+                        prefix={<UserOutlined className='input-icon'/>}
+                                    />
+                  
+                </Form.Item>
             <Form.Item
               name="password"
               rules={[{ required: true, message: 'Please enter your password!' }]}
             >
               <Input.Password
                 prefix={<LockOutlined className="input-icon" />}
-                placeholder="Password"
+                placeholder="Enter Your Password"
                 size="large"
                 className="input-field"
               />

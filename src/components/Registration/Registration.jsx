@@ -10,6 +10,23 @@ const Register = () => {
     console.log('Received values of form: ', values);
   };
 
+  const validatePassword = (_, value) => {
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[\W_]).{8,}$/;
+    if (value && passwordRegex.test(value)) {
+      return Promise.resolve();
+    }
+    return Promise.reject('Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and a special character.');
+  };
+
+  const validateConfirmPassword = ({ getFieldValue }) => ({
+    validator(_, value) {
+      if (!value || getFieldValue('password') === value) {
+        return Promise.resolve();
+      }
+      return Promise.reject('Passwords do not match!');
+    },
+  });
+
   return (
     <div className="login-wrapper">
       <div className="login-left">
@@ -33,7 +50,11 @@ const Register = () => {
               <Col span={12}>
                 <Form.Item
                   name="first_name"
-                  rules={[{ required: true, message: 'Please enter your first name!' }]}
+                  rules={[
+                    { required: true, message: 'Please enter your first name!' },
+                    { pattern: /^[A-Za-z]+$/, message: 'First name must contain only letters' },
+                    { max: 50, message: 'First name cannot exceed 50 characters' }
+                  ]}
                 >
                   <Input placeholder="First Name" size="large" className="input-field" />
                 </Form.Item>
@@ -41,7 +62,11 @@ const Register = () => {
               <Col span={12}>
                 <Form.Item
                   name="last_name"
-                  rules={[{ required: true, message: 'Please enter your last name!' }]}
+                  rules={[
+                    { required: true, message: 'Please enter your last name!' },
+                    { pattern: /^[A-Za-z]+$/, message: 'Last name must contain only letters' },
+                    { max: 50, message: 'Last name cannot exceed 50 characters' }
+                  ]}
                 >
                   <Input placeholder="Last Name" size="large" className="input-field" />
                 </Form.Item>
@@ -52,15 +77,23 @@ const Register = () => {
               <Col span={12}>
                 <Form.Item
                   name="email"
-                  rules={[{ required: true, message: 'Please enter your email!' }]}
+                  rules={[
+                    { required: true, message: 'Please enter your email!' },
+                    { type: 'email', message: 'Please enter a valid email!' }
+                  ]}
                 >
                   <Input placeholder="Email" size="large" className="input-field" />
                 </Form.Item>
               </Col>
+
+
               <Col span={12}>
                 <Form.Item
                   name="phone"
-                  rules={[{ required: true, message: 'Please enter your phone number!' }]}
+                  rules={[
+                    { required: true, message: 'Please enter your phone number!' },
+                    { pattern: /^\d{10}$/, message: 'Phone number must be 10 digits' }
+                  ]}
                 >
                   <Input placeholder="Phone No." size="large" className="input-field" />
                 </Form.Item>
@@ -72,15 +105,24 @@ const Register = () => {
               <Col span={12}>
                 <Form.Item
                   name="password"
-                  rules={[{ required: true, message: 'Please enter your password!' }]}
+                  rules={[
+                    { required: true, message: 'Please enter your password!' },
+                    { validator: validatePassword }
+                  ]}
                 >
                   <Input.Password placeholder="Password" size="large" className="input-field" />
                 </Form.Item>
               </Col>
+
+
               <Col span={12}>
                 <Form.Item
                   name="confirm_password"
-                  rules={[{ required: true, message: 'Please confirm your password!' }]}
+                  dependencies={['password']}
+                  rules={[
+                    { required: true, message: 'Please confirm your password!' },
+                    validateConfirmPassword
+                  ]}
                 >
                   <Input.Password placeholder="Confirm Password" size="large" className="input-field" />
                 </Form.Item>

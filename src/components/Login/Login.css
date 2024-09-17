@@ -5,7 +5,7 @@ body {
     overflow-y: hidden;
   }
   
-  /* Wrapper for two-column layout */
+
   .login-wrapper {
     background: url('https://marketplace.canva.com/EAFZcmTpKas/1/0/1600w/canva-video-intro-portada-fondo-background-simple-rosa-dorado-U93tpA4NMDA.jpg');
     display: flex;
@@ -15,8 +15,7 @@ body {
     background-color: #f0f2f5;
     padding: 20px;
   }
-  
-  /* Left side content */
+
   .login-left {
     flex: 1;
     padding: 40px;
@@ -24,16 +23,16 @@ body {
   
   .left-title {
     font-size: 2.5rem;
-    color: #333; /* Darker text for light background */
+    color: #333;
   }
   
   .left-paragraph {
     font-size: 1.2rem;
-    color: #555; /* Darker paragraph text */
+    color: #555;
     line-height: 1.6;
   }
   
-  /* Right side form */
+
   .login-right {
     flex: 1;
     display: flex;
@@ -42,7 +41,7 @@ body {
   }
   
   .login-card {
-    width: 500px; /* Adjust this value to make the form larger */
+    width: 500px; 
     padding: 40px;
     border-radius: 15px;
     box-shadow: -17px 20px 7px 6px rgba(0, 0, 0, 0.1);
@@ -51,11 +50,11 @@ body {
   }
 
 .input-field {
-    width: 100%; /* Ensure the fields take the full width */
+    width: 100%; 
     border-radius: 8px;
     transition: all 0.3s ease-in-out;
     color: #333;
-    padding: 10px; /* Adjust the padding to make fields appear larger */
+    padding: 10px; 
   }
 
   .input-field:hover, .input-field:focus {
