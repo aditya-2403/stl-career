@@ -1,0 +1,116 @@
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    overflow-y: hidden;
+  }
+  
+  /* Wrapper for two-column layout */
+  .login-wrapper {
+    background: url('https://marketplace.canva.com/EAFZcmTpKas/1/0/1600w/canva-video-intro-portada-fondo-background-simple-rosa-dorado-U93tpA4NMDA.jpg');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f2f5;
+    padding: 20px;
+  }
+  
+  /* Left side content */
+  .login-left {
+    flex: 1;
+    padding: 40px;
+  }
+  
+  .left-title {
+    font-size: 2.5rem;
+    color: #333; /* Darker text for light background */
+  }
+  
+  .left-paragraph {
+    font-size: 1.2rem;
+    color: #555; /* Darker paragraph text */
+    line-height: 1.6;
+  }
+  
+  /* Right side form */
+  .login-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .login-card {
+    width: 400px;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: -17px 20px 7px 6px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff72;
+    scale: 1.1;
+  }
+  
+  .login-title {
+    text-align: center;
+    font-weight: 700;
+    color: #333;
+  }
+  
+  .login-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+  }
+
+  .input-field {
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+    color: #333;
+  }
+  
+  .input-icon {
+    color: #555;
+  }
+  
+  .input-field:hover, .input-field:focus {
+    border-color: #1890ff;
+    box-shadow: 0 0 8px rgba(24, 144, 255, 0.2);
+  }
+  
+
+  .login-button {
+    background-color: #1890ff;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+    color: #fff;
+  }
+  
+  .login-button:hover {
+    background-color: #40a9ff;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    body{
+        overflow-y: auto;
+    }
+    .login-wrapper {
+      flex-direction: column;
+      padding: 10px;
+      background-color: #ffe4d2 !important;
+    }
+  
+    .login-left {
+      text-align: center;
+      padding: 20px;
+    }
+  
+    .login-card {
+      width: 90%;
+      height: 100%;
+      margin-bottom: 2rem;
+      scale: 1;
+    }
+  }
+  
