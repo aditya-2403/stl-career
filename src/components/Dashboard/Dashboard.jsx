@@ -1,12 +1,9 @@
 import React from "react";
 import { Layout, Menu, Card, Row, Col, Typography, Button } from "antd";
-import {
-  AppstoreOutlined,
-  MoneyCollectOutlined,
-  LogoutOutlined,
-} from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import Profile from "../Profile/Profile";
+import { MoneyCollectOutlined } from "@ant-design/icons";
 import "./Dashboard.css";
+import CommonHeaders from "../Header/CommonHeaders";
 
 const { Header, Content, Footer } = Layout;
 const { Title, Paragraph } = Typography;
@@ -62,34 +59,9 @@ const roles = [
 ];
 
 const Dashboard = () => {
-  const navigate = useNavigate();
-  const handleLogout = () => {
-    console.log("User logged out");
-    navigate("/");
-  };
-
   return (
     <Layout className="dashboard-layout">
-      <Header style={{ backgroundColor: "#001529" }}>
-        <div className="logo">Dashboard</div>
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
-          <Menu.Item key="1" icon={<AppstoreOutlined />}>
-            Home
-          </Menu.Item>
-          <Menu.Item key="2">Open Roles</Menu.Item>
-          <Menu.Item key="3">My Applications</Menu.Item>
-          <Menu.Item key="4">Profile</Menu.Item>
-          <Menu.Item
-            key="5"
-            style={{ marginLeft: "auto" }}
-            onClick={handleLogout}
-            icon={<LogoutOutlined />}
-          >
-            Logout
-          </Menu.Item>
-        </Menu>
-      </Header>
-
+      <CommonHeaders />
       <Content
         className="dashboard-content"
         style={{ padding: "20px 50px", marginTop: 64 }}
