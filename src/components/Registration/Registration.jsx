@@ -1,13 +1,46 @@
 import React from 'react';
-import { Form, Input, Button, Typography, Card, Row, Col } from 'antd';
-import { Link } from 'react-router-dom';
+import { Form, Input, Button, Typography, Card, Row, Col, message } from 'antd';
+import { Link, useNavigate } from 'react-router-dom';
+import bcrypt from 'bcryptjs';
 import '../Login/Login.css';
 
 const { Title, Text, Paragraph } = Typography;
 
 const Register = () => {
-  const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+  const navigate = useNavigate();
+
+  const onFinish = async (values) => {
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(values.password, saltRounds);
+
+    const data = {
+      username: values.username,
+      email: values.email,
+      phone: values.phone,
+      password: hashedPassword,
+    };
+
+    try {
+      const response = await fetch('http://localhost:5000/api/applicant/v1/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (result.status_code === 201 && result.success) {
+        message.success(result.message);
+        navigate('/');
+      } else {
+        message.error(result.message || 'Registration failed.');
+      }
+    } catch (error) {
+      console.error('Error registering user:', error);
+      message.error('An error occurred during registration.');
+    }
   };
 
   const validatePassword = (_, value) => {
@@ -15,7 +48,9 @@ const Register = () => {
     if (value && passwordRegex.test(value)) {
       return Promise.resolve();
     }
-    return Promise.reject('Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and a special character.');
+    return Promise.reject(
+      'Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and a special character.'
+    );
   };
 
   const validateConfirmPassword = ({ getFieldValue }) => ({
@@ -45,30 +80,17 @@ const Register = () => {
             onFinish={onFinish}
             layout="vertical"
           >
-
             <Row gutter={15}>
-              <Col span={12}>
+              <Col span={24}>
                 <Form.Item
-                  name="first_name"
+                  name="username"
                   rules={[
-                    { required: true, message: 'Please enter your first name!' },
-                    { pattern: /^[A-Za-z]+$/, message: 'First name must contain only letters' },
-                    { max: 50, message: 'First name cannot exceed 50 characters' }
+                    { required: true, message: 'Please enter your user name!' },
+                    { pattern: /^[A-Za-z]+$/, message: 'Username must contain only letters' },
+                    { max: 30, message: 'Username cannot exceed 30 characters' },
                   ]}
                 >
-                  <Input placeholder="First Name" size="large" className="input-field" />
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item
-                  name="last_name"
-                  rules={[
-                    { required: true, message: 'Please enter your last name!' },
-                    { pattern: /^[A-Za-z]+$/, message: 'Last name must contain only letters' },
-                    { max: 50, message: 'Last name cannot exceed 50 characters' }
-                  ]}
-                >
-                  <Input placeholder="Last Name" size="large" className="input-field" />
+                  <Input placeholder="Username" size="large" className="input-field" />
                 </Form.Item>
               </Col>
             </Row>
@@ -79,20 +101,19 @@ const Register = () => {
                   name="email"
                   rules={[
                     { required: true, message: 'Please enter your email!' },
-                    { type: 'email', message: 'Please enter a valid email!' }
+                    { type: 'email', message: 'Please enter a valid email!' },
                   ]}
                 >
                   <Input placeholder="Email" size="large" className="input-field" />
                 </Form.Item>
               </Col>
 
-
               <Col span={12}>
                 <Form.Item
                   name="phone"
                   rules={[
                     { required: true, message: 'Please enter your phone number!' },
-                    { pattern: /^\d{10}$/, message: 'Phone number must be 10 digits' }
+                    { pattern: /^\d{10}$/, message: 'Phone number must be 10 digits' },
                   ]}
                 >
                   <Input placeholder="Phone No." size="large" className="input-field" />
@@ -100,20 +121,18 @@ const Register = () => {
               </Col>
             </Row>
 
-
             <Row gutter={16}>
               <Col span={12}>
                 <Form.Item
                   name="password"
                   rules={[
                     { required: true, message: 'Please enter your password!' },
-                    { validator: validatePassword }
+                    { validator: validatePassword },
                   ]}
                 >
                   <Input.Password placeholder="Password" size="large" className="input-field" />
                 </Form.Item>
               </Col>
-
 
               <Col span={12}>
                 <Form.Item
@@ -121,7 +140,7 @@ const Register = () => {
                   dependencies={['password']}
                   rules={[
                     { required: true, message: 'Please confirm your password!' },
-                    validateConfirmPassword
+                    validateConfirmPassword,
                   ]}
                 >
                   <Input.Password placeholder="Confirm Password" size="large" className="input-field" />
@@ -129,14 +148,12 @@ const Register = () => {
               </Col>
             </Row>
 
-
             <Form.Item>
               <Button type="primary" htmlType="submit" block size="large" className="login-button">
                 Register
               </Button>
             </Form.Item>
           </Form>
-
 
           <Text className="text-center">
             Already have an account? <Link to="/">Log in here</Link>

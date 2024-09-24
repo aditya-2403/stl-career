@@ -53,7 +53,7 @@ const roles = [
   {
     title: "Business Analyst",
     description:
-      "Identify business needs and provide data-driven solutions. Analyze processes and recommend..",
+      "Identify business needs and provide data-driven solutions. Analyze processes and...",
     payscale: "$70,000 - $110,000",
   },
 ];
@@ -64,7 +64,7 @@ const Dashboard = () => {
       <CommonHeaders />
       <Content
         className="dashboard-content"
-        style={{ padding: "20px 50px", marginTop: 64 }}
+        style={{ padding: "20px 50px", marginTop: 35 }}
       >
         <Title>Jobs for you</Title>
         <Row gutter={[16, 16]}>
