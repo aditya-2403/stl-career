@@ -72,7 +72,7 @@ const Dashboard = () => {
             <Col xs={24} sm={12} md={8} lg={6} key={index}>
               <Card
                 title={role.title}
-                bordered={false}
+                bordered={false}cd
                 extra={<Button type="primary">Apply</Button>}
                 style={{ width: "100%" }}
               >
